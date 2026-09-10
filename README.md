@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Petstore uploadImage API — Automated Tests
 
 Automated test suite for `POST /pet/{petId}/uploadImage` on the Swagger
@@ -51,3 +52,6 @@ intentionally assert a *range* of acceptable status codes (e.g. `(200, 404)`)
 because this is a public demo server with loose validation. Where the actual
 result differs from ideal API behavior, that's the basis for a bug/finding
 in your test report, not a broken test.
+=======
+# petstore-api-tests
+>>>>>>> 9c26d98ec35eda2d54696aa098799f357c08382d
