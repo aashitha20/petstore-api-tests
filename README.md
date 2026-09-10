@@ -47,6 +47,7 @@ On Windows, use Task Scheduler to run the same `pytest` command daily.
 - Script/XSS content in metadata field
 - Response time and Content-Type header checks
 
+-
 See inline comments in `test_upload_image.py` — several negative tests
 intentionally assert a *range* of acceptable status codes (e.g. `(200, 404)`)
 because this is a public demo server with loose validation. Where the actual
