@@ -1,1 +1,39 @@
+name: Daily Petstore API Tests
 
+on:
+  schedule:
+    # Runs every day at 6:00 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}   # allows manual "Run workflow" trigger from the Actions tab
+  push:
+    branches: [ main ]    # optional: also run on every push, remove if not wanted
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run API tests
+        run: pytest test_upload_image.py -v --html=report.html --self-contained-html
+        continue-on-error: true   # so the report still uploads even if a test fails
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-${{ github.run_number }}
+          path: report.html
+          retention-days: 30
+
+      - name: Fail workflow if tests failed
+        run: pytest test_upload_image.py -v
